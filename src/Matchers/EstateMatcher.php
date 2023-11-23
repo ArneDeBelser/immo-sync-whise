@@ -159,7 +159,7 @@ class EstateMatcher implements MatcherContract
             return $this->getFieldValueFromLookup($key, $field[0]);
         }
 
-        $field = end($field);
+        $field = is_array($field) ? end($field) : $field;
 
         if (is_serialized($field)) {
             $object = unserialize($field);
