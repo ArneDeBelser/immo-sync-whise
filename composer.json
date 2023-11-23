@@ -17,7 +17,6 @@
     "require": {
         "fw4/whise-api": "^1.5",
         "monolog/monolog": "^3.3",
-        "league/container": "^4.2",
         "illuminate/collections": "^10.0",
         "phpunit/phpunit": "^10.3",
         "guzzlehttp/guzzle": "^7.0",
