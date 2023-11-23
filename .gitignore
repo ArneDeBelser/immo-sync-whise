@@ -2,6 +2,7 @@
 .env
 composer.lock
 .vscode
+.phpunit.cache
 /src/logs/*
 src/logs/operations.log
 .phpunit.result.cache
