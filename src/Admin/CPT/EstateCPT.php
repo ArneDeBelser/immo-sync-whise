@@ -170,6 +170,7 @@ class EstateCPT
         if (PostType::Name == $post_type) {
             wp_enqueue_media();
             wp_enqueue_style('whise-jquery-css', '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css');
+            wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
             // wp_enqueue_script('whise-gallery-js', plugins_url('/immo-sync-whise/assets/admin/js/gallery.js'), ['media-models'], ISW_VERSION);
             // wp_enqueue_script('whise-document-js', plugins_url('/immo-sync-whise/assets/admin/js/document.js'), ['media-models'], ISW_VERSION);
             wp_enqueue_script('jquery-ui-accordion');
