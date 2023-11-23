@@ -32,7 +32,7 @@ class EstateFetchService implements ServiceContract
 
             $this->estateParser->parseProperties();
             $this->estateParser->parseDetails();
-            $this->estateParser->parsePictures("urlSmall");
+            $this->estateParser->parsePictures("urlXXL");
 
             \WP_CLI::success("Fetched estate, created estate with post ID #{$postId}");
             $this->logger->info("Fetched estate, created estate with post ID #{$postId}");

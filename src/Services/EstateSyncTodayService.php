@@ -55,7 +55,7 @@ class EstateSyncTodayService implements ServiceContract
         // Parse the response object
         $this->estateParser->parseProperties();
         $this->estateParser->parseDetails();
-        $this->estateParser->parsePictures("urlSmall");
+        $this->estateParser->parsePictures("urlXXL");
 
         \WP_CLI::success("Imported estate, created estate with post ID {$postId}");
         $this->logger->info("Imported estate, created estate with post ID  {$postId}");
@@ -76,7 +76,7 @@ class EstateSyncTodayService implements ServiceContract
         $this->estateParser->removeDetails();
         $this->estateParser->parseDetails();
         $this->estateParser->removePictures();
-        $this->estateParser->parsePictures("urlSmall");
+        $this->estateParser->parsePictures("urlXXL");
 
         \WP_CLI::success("Synced estate, updated estate with post ID  {$postId}");
         $this->logger->info("Synced estate, updated estate with post ID  {$postId}");
