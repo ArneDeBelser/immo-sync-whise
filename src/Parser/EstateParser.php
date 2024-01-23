@@ -10,17 +10,14 @@ use Throwable;
 
 class EstateParser
 {
-    public $method;
+    protected $method;
 
-    public $postId;
+    protected $postId;
 
-    public $estateResponse;
+    protected $estateResponse;
 
-    private $client;
-
-    public function __construct(public LoggerInterface $logger)
+    public function __construct(public LoggerInterface $logger, private Client $client, private Database $db)
     {
-        $this->client = new Client();
     }
 
     public function setMethod(string $method): EstateParser
@@ -53,7 +50,11 @@ class EstateParser
                 if (isset($value->date)) $this->parse($key, $value, 'date');
                 if (isset($value->id)) $this->parse($key, $value, 'id');
             } else {
-                $this->parseLine($key, $value);
+                if ($key == 'shortDescription') {
+                    $this->parseLine($key, $value[0]->content ?: null); // shortDescription contains Whise\Api\Response\ResponseObject
+                } else {
+                    $this->parseLine($key, $value);
+                }
             }
 
             if (is_array($value)) $this->parseArray($key, $value[0], 'content');
@@ -136,11 +137,9 @@ class EstateParser
 
     public function parseDetails()
     {
-        $db = new Database();
-
         try {
             foreach ($this->estateResponse->details as $detailGroup) {
-                $db->save($this->postId, $detailGroup->getData());
+                $this->db->save($this->postId, $detailGroup->getData());
             }
         } catch (Throwable $e) {
             $error = json_encode($e->getMessage());
@@ -151,7 +150,7 @@ class EstateParser
 
     public function removeDetails()
     {
-        (new Database())->delete($this->postId);
+        $this->db->delete($this->postId);
     }
 
     private function parse($key, $value, $property)
@@ -173,7 +172,8 @@ class EstateParser
         call_user_func_array(
             $this->method,
             [
-                $this->postId, '_iws_' . $key,
+                $this->postId,
+                '_iws_' . $key,
                 $value->getData()[$property],
                 $this->method == 'add_post_meta' ? true : ''
             ]
@@ -205,6 +205,6 @@ class EstateParser
      */
     private function addShowMetaField($key)
     {
-        call_user_func_array($this->method, [$this->postId, '_show_iws_' . $key,  0, $this->method == 'add_post_meta' ? true : '']);
+        call_user_func_array($this->method, [$this->postId, '_show_iws_' . $key,  1, $this->method == 'add_post_meta' ? true : '']);
     }
 }
