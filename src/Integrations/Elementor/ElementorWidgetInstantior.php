@@ -2,6 +2,7 @@
 
 namespace ADB\ImmoSyncWhise\Integrations\Elementor;
 
+use ADB\ImmoSyncWhise\Integrations\Elementor\Widgets\EstateDetails;
 use ADB\ImmoSyncWhise\Integrations\Elementor\Widgets\EstateInformation;
 use ADB\ImmoSyncWhise\Matchers\EstateMatcher;
 use ADB\ImmoSyncWhise\Model\Estate;
@@ -67,6 +68,7 @@ class ElementorWidgetInstantior
     public function registerWidget($widgets_manager)
     {
         $widgets_manager->register(new EstateInformation());
+        $widgets_manager->register(new EstateDetails());
     }
 
     public function registerCategory($elements_manager)
