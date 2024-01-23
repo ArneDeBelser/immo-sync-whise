@@ -19,7 +19,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use ADB\ImmoSyncWhise\Admin\Settings;
 use ADB\ImmoSyncWhise\Api;
-use ADB\ImmoSyncWhise\Database\CreateDetailsTable;
+use ADB\ImmoSyncWhise\Database\IWS_DetailsTable;
 use ADB\ImmoSyncWhise\Plugin;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
@@ -31,7 +31,7 @@ define('ISW_VERSION', fileatime(__DIR__));
 define('ISW_PATH', __DIR__);
 define('PLUGIN__FILE__', __FILE__);
 
-new CreateDetailsTable();
+new IWS_DetailsTable();
 
 /**
  * Get main plugin class instance
